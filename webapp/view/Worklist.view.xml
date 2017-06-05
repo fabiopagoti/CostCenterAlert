@@ -1,0 +1,32 @@
+<mvc:View controllerName="festo.co.costcenteralert.controller.Worklist" xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:SemanticPage id="page">
+		<semantic:content>
+			<TreeTable id="treeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="false"
+				rows="{ path : '/CostCenterGroups', parameters : { countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'NodeID', hierarchyParentNodeFor : 'ParentNodeID', hierarchyDrillStateFor : 'DrillState' } } }">
+				<columns>
+					<Column label="Description">
+						<template>
+							<m:Text text="{Description}"/>
+						</template>
+					</Column>
+					<Column label="HierarchyLevel">
+						<template>
+							<m:Text text="{HierarchyLevel}"/>
+						</template>
+					</Column>
+					<Column label="NodeID">
+						<template>
+							<m:Text text="{NodeID}"/>
+						</template>
+					</Column>
+					<Column label="ParentNodeID">
+						<template>
+							<m:Text text="{ParentNodeID}"/>
+						</template>
+					</Column>
+				</columns>
+			</TreeTable>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>
