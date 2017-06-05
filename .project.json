@@ -46,9 +46,9 @@
     "resourceModelName": "i18n"
   },
   "mockpreview": {
-    "mockUri": "",
-    "metadataFilePath": "",
-    "loadJSONFiles": false,
+    "mockUri": "/sap/opu/odata/SAP/YCOSTCENTERALERT",
+    "metadataFilePath": "localService/metadata.xml",
+    "loadJSONFiles": true,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""
   },

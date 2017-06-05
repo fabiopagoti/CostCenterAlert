@@ -11,7 +11,7 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/here/goes/your/serviceurl/",
+				"uri": "/sap/opu/odata/SAP/YCOSTCENTERALERT",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
@@ -80,8 +80,7 @@
 				}
 			},
 			"": {
-				"dataSource": "mainService",
-				"preload": true
+				"dataSource": "mainService"
 			}
 		},
 		"services": {

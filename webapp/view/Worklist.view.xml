@@ -2,12 +2,13 @@
 	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
 	<semantic:SemanticPage id="page">
 		<semantic:content>
+			
 			<TreeTable id="treeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="false"
-				rows="{ path : '/CostCenterGroups', parameters : { countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'NodeID', hierarchyParentNodeFor : 'ParentNodeID', hierarchyDrillStateFor : 'DrillState' } } }">
+				rows="{ path : '/CostCenterGroups', parameters : { countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor : 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }">
 				<columns>
-					<Column label="Description">
+					<Column label="Name">
 						<template>
-							<m:Text text="{Description}"/>
+							<m:Text text="{Name}"/>
 						</template>
 					</Column>
 					<Column label="HierarchyLevel">
@@ -15,14 +16,14 @@
 							<m:Text text="{HierarchyLevel}"/>
 						</template>
 					</Column>
-					<Column label="NodeID">
+					<Column label="ID">
 						<template>
-							<m:Text text="{NodeID}"/>
+							<m:Text text="{Id}"/>
 						</template>
 					</Column>
-					<Column label="ParentNodeID">
+					<Column label="Parent">
 						<template>
-							<m:Text text="{ParentNodeID}"/>
+							<m:Text text="{ParentId}"/>
 						</template>
 					</Column>
 				</columns>

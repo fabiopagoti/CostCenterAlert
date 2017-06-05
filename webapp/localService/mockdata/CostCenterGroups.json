@@ -1,0 +1,25 @@
+[{
+	"Id": "1",
+	"Name": "A",
+	"ParentId": null,
+	"HierarchyLevel": 1,
+	"DrillState": "expanded"
+}, {
+	"Id": "2",
+	"Name": "B",
+	"ParentId": "1",
+	"HierarchyLevel": 2,
+	"DrillState": "expanded"
+}, {
+	"Id": "3",
+	"Name": "C",
+	"ParentId": "1",
+	"HierarchyLevel": 2,
+	"DrillState": "expanded"
+}, {
+	"Id": "4",
+	"Name": "D",
+	"ParentId": "3",
+	"HierarchyLevel": 3,
+	"DrillState": "leaf"
+}]

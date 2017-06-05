@@ -19,10 +19,6 @@ sap.ui.define([
 			 * @override
 			 */
 			init : function () {
-				// call the base component's init function
-				UIComponent.prototype.init.apply(this, arguments);
-
-				// initialize the error handler with the component
 				this._oErrorHandler = new ErrorHandler(this);
 
 				// set the device model
@@ -30,8 +26,11 @@ sap.ui.define([
 				// set the FLP model
 				this.setModel(models.createFLPModel(), "FLP");
 
+				// call the base component's init function and create the App view
+				UIComponent.prototype.init.apply(this, arguments);
+
 				// create the views based on the url/hash
-				this.getRouter().initialize();
+				this.getRouter().initialize();				
 			},
 
 			/**

@@ -2,6 +2,7 @@ sap.ui.define([
 		"sap/ui/core/util/MockServer"
 	], function (MockServer) {
 		"use strict";
+		
 		var oMockServer,
 			_sAppModulePath = "festo/co/costcenteralert/",
 			_sJsonFilesModulePath = _sAppModulePath + "localService/mockdata";
@@ -15,18 +16,25 @@ sap.ui.define([
 			 * @public
 			 */
 			init : function () {
-				var oUriParameters = jQuery.sap.getUriParameters(),
-					sJsonFilesUrl = jQuery.sap.getModulePath(_sJsonFilesModulePath),
-					sManifestUrl = jQuery.sap.getModulePath(_sAppModulePath + "manifest", ".json"),
-					sEntity = "CostCenterGroups",
-					sErrorParam = oUriParameters.get("errorType"),
-					iErrorCode = sErrorParam === "badRequest" ? 400 : 500,
+				
+				// @type jQuery.sap.util.UriParameters
+				var oUriParameters = jQuery.sap.getUriParameters();
+				
+				// relative mockdata folder
+				var sJsonFilesUrl = jQuery.sap.getModulePath(_sJsonFilesModulePath);
+				
+				// Service URL
+				var sManifestUrl = jQuery.sap.getModulePath(_sAppModulePath + "manifest", ".json"),
 					oManifest = jQuery.sap.syncGetJSON(sManifestUrl).data,
 					oMainDataSource = oManifest["sap.app"].dataSources.mainService,
 					sMetadataUrl = jQuery.sap.getModulePath(_sAppModulePath + oMainDataSource.settings.localUri.replace(".xml", ""), ".xml"),
 					// ensure there is a trailing slash
 					sMockServerUrl = /.*\/$/.test(oMainDataSource.uri) ? oMainDataSource.uri : oMainDataSource.uri + "/";
-
+					
+				var sEntity = "SalesDocuments",
+					sErrorParam = oUriParameters.get("errorType"),
+					iErrorCode = sErrorParam === "badRequest" ? 400 : 500;
+					
 				oMockServer = new MockServer({
 					rootUri : sMockServerUrl
 				});
@@ -37,10 +45,10 @@ sap.ui.define([
 					autoRespondAfter : (oUriParameters.get("serverDelay") || 1000)
 				});
 
-				// load local mock data
 				oMockServer.simulate(sMetadataUrl, {
 					sMockdataBaseUrl : sJsonFilesUrl,
 					bGenerateMissingMockData : true
+					//,aEntitySetsNames: null
 				});
 
 				var aRequests = oMockServer.getRequests(),

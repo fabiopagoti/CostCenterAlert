@@ -11,6 +11,9 @@
                 </Key>
                 <Property Name="Id" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
+                <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
+                <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
                 <NavigationProperty Name="ToChildren" Relationship="S1.CostCenterGroup_CostCenterGroup" ToRole="Child" FromRole="Parent"></NavigationProperty>
                 <NavigationProperty Name="ToParent" Relationship="S1.CostCenterGroup_CostCenterGroup" ToRole="Parent" FromRole="Child"></NavigationProperty>
                 <NavigationProperty Name="ToCostCenters" Relationship="S1.CostCenterGroup_CostCenter" ToRole="Child" FromRole="Parent"></NavigationProperty>
