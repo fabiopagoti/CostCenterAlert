@@ -1,10 +1,9 @@
-<mvc:View controllerName="festo.co.costcenteralert.controller.Worklist" xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+<mvc:View xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="festo.co.costcenteralert.controller.Worklist">
 	<semantic:SemanticPage id="page">
 		<semantic:content>
-			
 			<TreeTable id="treeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="false"
-				rows="{ path : '/CostCenterGroups', parameters : { countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor : 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }">
+				rows="{ path : '/CostCenterGroups', parameters : { operationMode: 'Client', countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor : 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }">
 				<columns>
 					<Column label="Name">
 						<template>
@@ -28,6 +27,11 @@
 					</Column>
 				</columns>
 			</TreeTable>
+			<m:List noDataText="Drop list items here" items="{/CostCenterGroups}">
+				<m:items>
+					<m:StandardListItem title="{Id}" description="{Name}" icon="sap-icon://picture"/>
+				</m:items>
+			</m:List>
 		</semantic:content>
 	</semantic:SemanticPage>
 </mvc:View>

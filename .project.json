@@ -6,12 +6,8 @@
   "build": {
     "targetFolder": "dist",
     "sourceFolder": "webapp",
-    "excludedFolders": [
-      "test"
-    ],
-    "excludedFiles": [
-      "test.html"
-    ],
+    "excludedFolders": [],
+    "excludedFiles": [],
     "buildRequired": true
   },
   "dataBinding": {
