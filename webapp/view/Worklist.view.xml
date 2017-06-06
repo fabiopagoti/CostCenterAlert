@@ -89,7 +89,7 @@
 					<Column label="Status" hAlign="Center">
 						<template>
 							<m:VBox alignItems="Center">
-								<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="100" forecastValue="110" class="sapUiSmallMargin">
+								<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="{Planned}" class="sapUiSmallMargin">
 									<micro:actual>
 										<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>
 									</micro:actual>

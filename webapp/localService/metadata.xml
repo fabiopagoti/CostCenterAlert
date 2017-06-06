@@ -18,11 +18,12 @@
                 <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
                 <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
                 <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="Actual" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="VarAbs" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="VarPerc" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="State" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Color" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
             </EntityType>
             <EntityType Name="CostCenterGroup">
