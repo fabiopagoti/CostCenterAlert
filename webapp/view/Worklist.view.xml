@@ -1,8 +1,17 @@
-<mvc:View xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:layout="sap.ui.layout" xmlns:micro="sap.suite.ui.microchart" 
-	xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="festo.co.costcenteralert.controller.Worklist">
-	<semantic:SemanticPage id="page">
+<mvc:View
+	controllerName="festo.co.costcenteralert.controller.Worklist"
+	xmlns:m="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:micro="sap.suite.ui.microchart" 
+	xmlns:footerbar="sap.ushell.ui.footerbar" 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.ui.table" 
+	>
+	<semantic:FullscreenPage id="page">
+		
 		<semantic:content>
-			
 			<TreeTable 
 				id="treeTable" 
 				selectionMode="Single" 
@@ -11,10 +20,9 @@
 				fixedLayout="false" 
 				visibleRowCountMode="Auto"
 				rows="{ 
-					path: '/CostCenterGroups', 
+					path: '/CostUnits', 
 					parameters: 
 					{
-						
 						countMode: 'Inline', 
 						treeAnnotationProperties: 
 						{ 
@@ -26,16 +34,18 @@
 					}
 				}">
 				<columns>
-					<Column 
-						label="Name">
+					<Column label="Name" hAlign="Center" >
 						<template>
-							<m:ObjectIdentifier text="{Name}"/>
+							<layout:HorizontalLayout>
+								<core:Icon src="sap-icon://{Icon}" />
+								<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>
+							</layout:HorizontalLayout>
 						</template>
 					</Column>
-					
-					<Column label="Actual">
+					<Column label="Actual" hAlign="Center" width="8em">
 						<template>
 							<m:ObjectNumber
+								textAlign="Center"
 								number="{
 										parts:[{path:'Actual'},{path:'Currency'}],
 										type: 'sap.ui.model.type.Currency',
@@ -44,9 +54,10 @@
 								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="Planned">
+					<Column label="Planned" hAlign="Center" width="8em">
 						<template>
 							<m:ObjectNumber
+								textAlign="Center"
 								number="{
 										parts:[{path:'Planned'},{path:'Currency'}],
 										type: 'sap.ui.model.type.Currency',
@@ -55,10 +66,11 @@
 								unit="{Currency}" />
 						</template>
 					</Column>
-					<Column label="Variance">
+					<Column label="Variance" hAlign="Center" width="8em">
 						<template>
-							<layout:HorizontalLayout>
+							<m:VBox alignItems="Center">
 								<m:ObjectNumber
+									textAlign="Center"
 									number="{
 											parts:[{path:'VarAbs'},{path:'Currency'}],
 											type: 'sap.ui.model.type.Currency',
@@ -66,30 +78,36 @@
 										}"
 									unit="{Currency}"
 									state="{State}" />
-								<m:ObjectNumber
-									number="({VarPerc}"
-									unit="%)"
+								<m:ObjectNumber 
+									class="sapUiTinyMarginBegin"
+									number=" {VarPerc}"
+									unit="%"
 									state="{State}" />
-							</layout:HorizontalLayout>
+							</m:VBox>
 						</template>
 					</Column>
-					<!--<Column label="HierarchyLevel">-->
-					<!--	<template>-->
-					<!--		<m:Text text="{HierarchyLevel}"/>-->
-					<!--	</template>-->
-					<!--</Column>-->
-					<!--<Column label="ID">-->
-					<!--	<template>-->
-					<!--		<m:Text text="{Id}"/>-->
-					<!--	</template>-->
-					<!--</Column>-->
-					<!--<Column label="Parent">-->
-					<!--	<template>-->
-					<!--		<m:Text text="{ParentId}"/>-->
-					<!--	</template>-->
-					<!--</Column>-->
+					<Column label="Status" hAlign="Center">
+						<template>
+							<m:VBox alignItems="Center">
+								<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="100" forecastValue="110" class="sapUiSmallMargin">
+									<micro:actual>
+										<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>
+									</micro:actual>
+									<micro:thresholds>
+										<micro:BulletMicroChartData value="0" color="Good"/>
+										<micro:BulletMicroChartData value="{= ${Planned} / 2 }" color="Neutral"/>
+										<micro:BulletMicroChartData actualValueLabel="Planned" value="{Planned}" color="Error"/>
+									</micro:thresholds>
+								</micro:BulletMicroChart>
+							</m:VBox>
+						</template>
+					</Column>
+					
 				</columns>
 			</TreeTable>
 		</semantic:content>
-	</semantic:SemanticPage>
+			<!--<semantic:mainAction>-->
+				<!--<semantic:MainAction press="onDisplay" text="Display" />-->
+			<!--</semantic:mainAction>-->
+	</semantic:FullscreenPage>
 </mvc:View>

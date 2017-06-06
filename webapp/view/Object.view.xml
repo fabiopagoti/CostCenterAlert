@@ -1,38 +1,96 @@
 <mvc:View
 	controllerName="festo.co.costcenteralert.controller.Object"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic"
-	xmlns:footerbar="sap.ushell.ui.footerbar">
-
-	<semantic:SemanticPage
+	xmlns:m="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:semantic="sap.m.semantic" 
+	xmlns:layout="sap.ui.layout" 
+	xmlns:micro="sap.suite.ui.microchart" 
+	xmlns:footerbar="sap.ushell.ui.footerbar" 
+	xmlns:core="sap.ui.core"
+	xmlns="sap.ui.table" 
+	>
+	<semantic:FullscreenPage
 		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false"
 		busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
+		<semantic:content>
+			<TreeTable 
+				id="treeTable" 
+				selectionMode="Single" 
+				enableColumnReordering="true" 
+				expandFirstLevel="false" 
+				fixedLayout="false" 
+				visibleRowCountMode="Auto"
+				rows="{ 
+					path: '/ToCostElementGroups', 
+					parameters: 
+					{
+						countMode: 'Inline', 
+						treeAnnotationProperties: 
+						{ 
+							hierarchyLevelFor: 'HierarchyLevel', 
+							hierarchyNodeFor : 'Id', 
+							hierarchyParentNodeFor: 'ParentId', 
+							hierarchyDrillStateFor : 'DrillState'
+						}
+					}
+				}">
+				<columns>
+					<Column label="Name" hAlign="Center" >
+						<template>
+							<layout:HorizontalLayout>
+								<core:Icon src="sap-icon://{Icon}"/>
+								<m:ObjectIdentifier text=" {Name}"/>
+							</layout:HorizontalLayout>
+						</template>
+					</Column>
+					<Column label="Actual" hAlign="Center">
+						<template>
+							<m:ObjectNumber
+								textAlign="Center"
+								number="{
+										parts:[{path:'Actual'},{path:'Currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+								unit="{Currency}"/>
+						</template>
+					</Column>
+					<Column label="Planned" hAlign="Center">
+						<template>
+							<m:ObjectNumber
+								textAlign="Center"
+								number="{
+										parts:[{path:'Planned'},{path:'Currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+								unit="{Currency}" />
+						</template>
+					</Column>
+					<Column label="Variance" hAlign="Center">
+						<template>
+							<layout:HorizontalLayout>
+								<m:ObjectNumber
+									textAlign="Center"
+									number="{
+											parts:[{path:'VarAbs'},{path:'Currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {showMeasure: false}
+										}"
+									unit="{Currency} "
+									state="{State}" />
+								<m:ObjectNumber
+									number=" ({VarPerc}"
+									unit="%)"
+									state="{State}" />
+							</layout:HorizontalLayout>
+						</template>
+					</Column>
+				</columns>
+			</TreeTable>
+		</semantic:content>
 
-		<semantic:titleHeading>
-			<Title text="{Name}" />
-		</semantic:titleHeading>
-
-		<semantic:headerContent>
-			<ObjectNumber
-			/>
-		</semantic:headerContent>
-
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
-
-		<semantic:shareInJamAction>
-			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
-		</semantic:shareInJamAction>
-
-		<semantic:saveAsTileAction>
-			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
-		</semantic:saveAsTileAction>
-
-	</semantic:SemanticPage>
+	</semantic:FullscreenPage>
 
 </mvc:View>

@@ -7,6 +7,24 @@
         xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
         <Schema
             xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="S1">
+            <EntityType Name="CostUnit">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" edmanno:StoreGeneratedPattern="Identity"></Property>
+                <Property Name="Type" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Icon" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
+                <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
+                <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="Actual" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="VarAbs" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="VarPerc" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="State" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
+            </EntityType>
             <EntityType Name="CostCenterGroup">
                 <Key>
                     <PropertyRef Name="Id"/>
@@ -16,6 +34,7 @@
                 <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
                 <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
                 <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Type" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="Actual" Type="Edm.Decimal" Nullable="false"></Property>
                 <Property Name="VarAbs" Type="Edm.Decimal" Nullable="false"></Property>
@@ -69,6 +88,7 @@
                 <End Type="S1.CostElement" Role="Child" Multiplicity="*"></End>
             </Association>
             <EntityContainer Name="EC1" m:IsDefaultEntityContainer="true" edmanno:LazyLoadingEnabled="true">
+                <EntitySet Name="CostUnits" EntityType="S1.CostUnit"></EntitySet>
                 <EntitySet Name="CostCenterGroups" EntityType="S1.CostCenterGroup"></EntitySet>
                 <EntitySet Name="CostCenters" EntityType="S1.CostCenter"></EntitySet>
                 <EntitySet Name="CostElementGroups" EntityType="S1.CostElementGroup"></EntitySet>
