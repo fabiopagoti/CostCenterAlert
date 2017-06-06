@@ -47,7 +47,7 @@ sap.ui.define([
 
 				oMockServer.simulate(sMetadataUrl, {
 					sMockdataBaseUrl : sJsonFilesUrl,
-					bGenerateMissingMockData : true
+					bGenerateMissingMockData : false
 					//,aEntitySetsNames: null
 				});
 

@@ -1,25 +1,49 @@
 [{
 	"Id": "1",
-	"Name": "A",
+	"Name": "Cost Center Group A",
 	"ParentId": null,
-	"HierarchyLevel": 1,
-	"DrillState": "expanded"
+	"HierarchyLevel": 0,
+	"DrillState": "expanded",
+	"Planned": 1000,
+	"Actual": 800,
+	"VarAbs": -200,
+	"VarPerc": -20,
+	"State": "Success",
+	"Currency": "EUR"
 }, {
 	"Id": "2",
-	"Name": "B",
+	"Name": "Cost Center Group A.1",
 	"ParentId": "1",
-	"HierarchyLevel": 2,
-	"DrillState": "expanded"
+	"HierarchyLevel": 1,
+	"DrillState": "expanded",
+	"Planned": 700,
+	"Actual": 150,
+	"VarAbs": -200,
+	"VarPerc": -20,
+	"State": "Warning",
+	"Currency": "EUR"
 }, {
 	"Id": "3",
-	"Name": "C",
+	"Name": "Cost Center Group A.2",
 	"ParentId": "1",
-	"HierarchyLevel": 2,
-	"DrillState": "expanded"
+	"HierarchyLevel": 1,
+	"DrillState": "expanded",
+	"Planned": 300,
+	"Actual": 650,
+	"VarAbs": 350,
+	"VarPerc": 100,
+	"State": "Error",
+	"Currency": "EUR"
 }, {
 	"Id": "4",
-	"Name": "D",
+	"Name": "Cost Center Group A.2.1",
 	"ParentId": "3",
-	"HierarchyLevel": 3,
-	"DrillState": "leaf"
+	"HierarchyLevel": 2,
+	"DrillState": "leaf",
+	"Planned": 300,
+	"Actual": 650,
+	"VarAbs": 350,
+	"VarPerc": 100,
+	"State": "Error",
+	"Currency": "EUR"
 }]

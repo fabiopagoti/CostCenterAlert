@@ -1,37 +1,95 @@
-<mvc:View xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+<mvc:View xmlns="sap.ui.table" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:layout="sap.ui.layout" xmlns:micro="sap.suite.ui.microchart" 
 	xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="festo.co.costcenteralert.controller.Worklist">
 	<semantic:SemanticPage id="page">
 		<semantic:content>
-			<TreeTable id="treeTable" selectionMode="Single" enableColumnReordering="false" expandFirstLevel="false"
-				rows="{ path : '/CostCenterGroups', parameters : { operationMode: 'Client', countMode: 'Inline', treeAnnotationProperties : { hierarchyLevelFor : 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor : 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }">
+			
+			<TreeTable 
+				id="treeTable" 
+				selectionMode="Single" 
+				enableColumnReordering="true" 
+				expandFirstLevel="false" 
+				fixedLayout="false" 
+				visibleRowCountMode="Auto"
+				rows="{ 
+					path: '/CostCenterGroups', 
+					parameters: 
+					{
+						
+						countMode: 'Inline', 
+						treeAnnotationProperties: 
+						{ 
+							hierarchyLevelFor: 'HierarchyLevel', 
+							hierarchyNodeFor : 'Id', 
+							hierarchyParentNodeFor: 'ParentId', 
+							hierarchyDrillStateFor : 'DrillState'
+						}
+					}
+				}">
 				<columns>
-					<Column label="Name">
+					<Column 
+						label="Name">
 						<template>
-							<m:Text text="{Name}"/>
+							<m:ObjectIdentifier text="{Name}"/>
 						</template>
 					</Column>
-					<Column label="HierarchyLevel">
+					
+					<Column label="Actual">
 						<template>
-							<m:Text text="{HierarchyLevel}"/>
+							<m:ObjectNumber
+								number="{
+										parts:[{path:'Actual'},{path:'Currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="ID">
+					<Column label="Planned">
 						<template>
-							<m:Text text="{Id}"/>
+							<m:ObjectNumber
+								number="{
+										parts:[{path:'Planned'},{path:'Currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatOptions: {showMeasure: false}
+									}"
+								unit="{Currency}" />
 						</template>
 					</Column>
-					<Column label="Parent">
+					<Column label="Variance">
 						<template>
-							<m:Text text="{ParentId}"/>
+							<layout:HorizontalLayout>
+								<m:ObjectNumber
+									number="{
+											parts:[{path:'VarAbs'},{path:'Currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {showMeasure: false}
+										}"
+									unit="{Currency}"
+									state="{State}" />
+								<m:ObjectNumber
+									number="({VarPerc}"
+									unit="%)"
+									state="{State}" />
+							</layout:HorizontalLayout>
 						</template>
 					</Column>
+					<!--<Column label="HierarchyLevel">-->
+					<!--	<template>-->
+					<!--		<m:Text text="{HierarchyLevel}"/>-->
+					<!--	</template>-->
+					<!--</Column>-->
+					<!--<Column label="ID">-->
+					<!--	<template>-->
+					<!--		<m:Text text="{Id}"/>-->
+					<!--	</template>-->
+					<!--</Column>-->
+					<!--<Column label="Parent">-->
+					<!--	<template>-->
+					<!--		<m:Text text="{ParentId}"/>-->
+					<!--	</template>-->
+					<!--</Column>-->
 				</columns>
 			</TreeTable>
-			<m:List noDataText="Drop list items here" items="{/CostCenterGroups}">
-				<m:items>
-					<m:StandardListItem title="{Id}" description="{Name}" icon="sap-icon://picture"/>
-				</m:items>
-			</m:List>
 		</semantic:content>
 	</semantic:SemanticPage>
 </mvc:View>
