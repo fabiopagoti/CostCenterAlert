@@ -4,7 +4,7 @@ sap.ui.define([
 	], function (BaseController, JSONModel) {
 		"use strict";
 
-		return BaseController.extend("festo.co.costcenteralert.controller.App", {
+		return BaseController.extend("festo.co.costcenteralert.controller.S0", {
 
 			onInit : function () {
 				var oViewModel,

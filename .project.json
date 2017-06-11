@@ -11,19 +11,19 @@
     "buildRequired": true
   },
   "dataBinding": {
-    "/webapp/view/App.view.xml": {
-      "entitySet": "UNBINDKEY"
-    },
     "/webapp/view/NotFound.view.xml": {
       "entitySet": "UNBINDKEY"
     },
     "/webapp/view/ObjectNotFound.view.xml": {
       "entitySet": "UNBINDKEY"
     },
-    "/webapp/view/Worklist.view.xml": {
+    "/webapp/view/S0.view.xml": {
+      "entitySet": "UNBINDKEY"
+    },
+    "/webapp/view/S1.view.xml": {
       "entitySet": "CostCenterGroups"
     },
-    "/webapp/view/Object.view.xml": {
+    "/webapp/view/S2.view.xml": {
       "entitySet": "CostCenterGroups"
     }
   },

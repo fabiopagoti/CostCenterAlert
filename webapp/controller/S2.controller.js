@@ -12,7 +12,7 @@ sap.ui.define([
 	) {
 		"use strict";
 
-		return BaseController.extend("festo.co.costcenteralert.controller.Object", {
+		return BaseController.extend("festo.co.costcenteralert.controller.S2", {
 
 			formatter: formatter,
 
