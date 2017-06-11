@@ -37,9 +37,10 @@ sap.ui.define([
 				worklistTableTitle: this.getResourceBundle().getText("worklistTableTitle"),
 				saveAsTileTitle: this.getResourceBundle().getText("saveAsTileTitle", this.getResourceBundle().getText("worklistViewTitle")),
 				tableNoDataText: this.getResourceBundle().getText("tableNoDataText"),
-				tableBusyDelay: 0
+				tableBusyDelay: 0,
+				showFooter: false
 			});
-			this.setModel(oViewModel, "worklistView");
+			this.setModel(oViewModel, "view");
 
 			// Make sure, busy indication is showing immediately so there is no
 			// break after the busy indication for loading the view's meta data is
@@ -88,6 +89,23 @@ sap.ui.define([
 			// The source is the list item that got pressed
 			this._showObject(oEvent.getSource());
 		},
+
+		onRowSelectionChange: function(oEvent) {
+			var oViewModel = this.getModel("view");
+			var oSource = oEvent.getSource();
+			var oParameters = oEvent.getParameters();
+			
+			if (oSource.getSelectedIndex() >= 0) {
+				oViewModel.setProperty("/showFooter", true);
+				var oSelectedObject = oParameters.rowContext.getObject();
+			} else {
+				oViewModel.setProperty("/showFooter", false);
+			}
+		},
+
+		onDisplay: function(oEvent) {
+
+		},
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -99,8 +117,8 @@ sap.ui.define([
 		 * @private
 		 */
 		_showObject: function(oItem) {
-			this.getRouter().navTo("object", {
-				objectId: oItem.getBindingContext().getProperty("Id")
+			this.getRouter().navTo("cost-center-group", {
+				costCenterGroup: oItem.getBindingContext().getProperty("Id")
 			});
 		}
 

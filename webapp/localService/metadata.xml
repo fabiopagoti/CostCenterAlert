@@ -25,90 +25,18 @@
                 <Property Name="State" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Color" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
+                <NavigationProperty Name="ToCostElementGroups" Relationship="S1.CostUnit_CostUnit" FromRole="Parent" ToRole="Child"></NavigationProperty>
             </EntityType>
-            <EntityType Name="CostCenterGroup">
-                <Key>
-                    <PropertyRef Name="Id"/>
-                </Key>
-                <Property Name="Id" Type="Edm.String" Nullable="false" edmanno:StoreGeneratedPattern="Identity"></Property>
-                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
-                <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
-                <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Type" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
-                <Property Name="Actual" Type="Edm.Decimal" Nullable="false"></Property>
-                <Property Name="VarAbs" Type="Edm.Decimal" Nullable="false"></Property>
-                <Property Name="VarPerc" Type="Edm.Decimal" Nullable="false"></Property>
-                <Property Name="State" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
-                <NavigationProperty Name="ToChildren" Relationship="S1.CostCenterGroup_CostCenterGroup" ToRole="Child" FromRole="Parent"></NavigationProperty>
-                <NavigationProperty Name="ToParent" Relationship="S1.CostCenterGroup_CostCenterGroup" ToRole="Parent" FromRole="Child"></NavigationProperty>
-                <NavigationProperty Name="ToCostCenters" Relationship="S1.CostCenterGroup_CostCenter" ToRole="Child" FromRole="Parent"></NavigationProperty>
-            </EntityType>
-            <EntityType Name="CostCenter">
-                <Key>
-                    <PropertyRef Name="Id"/>
-                </Key>
-                <Property Name="Id" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
-                <NavigationProperty Name="ToCostCenterGroup" Relationship="S1.CostCenterGroup_CostCenter" ToRole="Parent" FromRole="Child"></NavigationProperty>
-            </EntityType>
-            <EntityType Name="CostElementGroup">
-                <Key>
-                    <PropertyRef Name="Id"/>
-                </Key>
-                <Property Name="Id" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
-                <NavigationProperty Name="ToChildren" Relationship="S1.CostElementGroup_CostElementGroup" ToRole="Child" FromRole="Parent"></NavigationProperty>
-                <NavigationProperty Name="ToParent" Relationship="S1.CostElementGroup_CostElementGroup" ToRole="Parent" FromRole="Child"></NavigationProperty>
-                <NavigationProperty Name="ToCostElements" Relationship="S1.CostElementGroup_CostElement" ToRole="Child" FromRole="Parent"></NavigationProperty>
-            </EntityType>
-            <EntityType Name="CostElement">
-                <Key>
-                    <PropertyRef Name="Id"/>
-                </Key>
-                <Property Name="Id" Type="Edm.String" Nullable="false"></Property>
-                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
-                <NavigationProperty Name="ToCostElementGroup" Relationship="S1.CostElementGroup_CostElement" ToRole="Parent" FromRole="Child"></NavigationProperty>
-            </EntityType>
-            <Association Name="CostCenterGroup_CostCenterGroup">
-                <End Type="S1.CostCenterGroup" Role="Parent" Multiplicity="1"></End>
-                <End Type="S1.CostCenterGroup" Role="Child" Multiplicity="*"></End>
-            </Association>
-            <Association Name="CostCenterGroup_CostCenter">
-                <End Type="S1.CostCenterGroup" Role="Parent" Multiplicity="1"></End>
-                <End Type="S1.CostCenter" Role="Child" Multiplicity="*"></End>
-            </Association>
-            <Association Name="CostElementGroup_CostElementGroup">
-                <End Type="S1.CostElementGroup" Role="Parent" Multiplicity="1"></End>
-                <End Type="S1.CostElementGroup" Role="Child" Multiplicity="*"></End>
-            </Association>
-            <Association Name="CostElementGroup_CostElement">
-                <End Type="S1.CostElementGroup" Role="Parent" Multiplicity="1"></End>
-                <End Type="S1.CostElement" Role="Child" Multiplicity="*"></End>
+            <Association Name="CostUnit_CostUnit">
+                <End Type="S1.CostUnit" Role="Parent" Multiplicity="1"></End>
+                <End Type="S1.CostUnit" Role="Child" Multiplicity="*"></End>
             </Association>
             <EntityContainer Name="EC1" m:IsDefaultEntityContainer="true" edmanno:LazyLoadingEnabled="true">
-                <EntitySet Name="CostUnits" EntityType="S1.CostUnit"></EntitySet>
-                <EntitySet Name="CostCenterGroups" EntityType="S1.CostCenterGroup"></EntitySet>
-                <EntitySet Name="CostCenters" EntityType="S1.CostCenter"></EntitySet>
-                <EntitySet Name="CostElementGroups" EntityType="S1.CostElementGroup"></EntitySet>
-                <EntitySet Name="CostElements" EntityType="S1.CostElement"></EntitySet>
-                <AssociationSet Name="CostCenterGroups_CostCenterGroups" Association="S1.CostCenterGroup_CostCenterGroup">
-                    <End Role="Parent" EntitySet="CostCenterGroups"></End>
-                    <End Role="Child" EntitySet="CostCenterGroups"></End>
-                </AssociationSet>
-                <AssociationSet Name="CostCenterGroups_CostCenters" Association="S1.CostCenterGroup_CostCenter">
-                    <End Role="Parent" EntitySet="CostCenterGroups"></End>
-                    <End Role="Child" EntitySet="CostCenters"></End>
-                </AssociationSet>
-                <AssociationSet Name="CostElementGroups_CostElementGroups" Association="S1.CostElementGroup_CostElementGroup">
-                    <End Role="Parent" EntitySet="CostElementGroups"></End>
-                    <End Role="Child" EntitySet="CostElementGroups"></End>
-                </AssociationSet>
-                <AssociationSet Name="CostElementGroups_CostElements" Association="S1.CostElementGroup_CostElement">
-                    <End Role="Parent" EntitySet="CostElementGroups"></End>
-                    <End Role="Child" EntitySet="CostElements"></End>
+                <EntitySet Name="CostCenterUnits" EntityType="S1.CostUnit"></EntitySet>
+                <EntitySet Name="CostElementUnits" EntityType="S1.CostUnit"></EntitySet>
+                <AssociationSet Name="CostCenterUnits_CostElementUnits" Association="S1.CostUnit_CostUnit">
+                    <End Role="Parent" EntitySet="CostCenterUnits"></End>
+                    <End Role="Child" EntitySet="CostElementUnits"></End>
                 </AssociationSet>
             </EntityContainer>
         </Schema>

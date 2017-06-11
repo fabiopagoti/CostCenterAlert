@@ -1,113 +1,115 @@
-<mvc:View
-	controllerName="festo.co.costcenteralert.controller.S1"
-	xmlns:m="sap.m" 
-	xmlns:mvc="sap.ui.core.mvc" 
-	xmlns:semantic="sap.m.semantic" 
-	xmlns:layout="sap.ui.layout" 
-	xmlns:micro="sap.suite.ui.microchart" 
-	xmlns:footerbar="sap.ushell.ui.footerbar" 
-	xmlns:core="sap.ui.core"
-	xmlns="sap.ui.table" 
-	>
-	<semantic:FullscreenPage id="page">
-		
+<mvc:View controllerName="festo.co.costcenteralert.controller.S1" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:layout="sap.ui.layout" xmlns:micro="sap.suite.ui.microchart" xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:core="sap.ui.core" xmlns="sap.ui.table">
+	<semantic:SemanticPage id="page" showFooter="{view>/showFooter}" headerPinnable="false">
+		<semantic:titleHeading>
+			<m:Title text="Cost Centers and Groups"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<m:Panel headerText="Filters" expandable="true">
+				<m:content>
+					<m:SearchField placeholder="Cost Center (Group) Name" value="{ui>/globalFilter}" search="filterGlobally"/>
+					<m:FlexBox alignItems="Start" justifyContent="Start">
+						<m:items>
+							<m:ComboBox placeholder="Year" class="sapUiSmallMarginEnd">
+								<core:Item key="2017" text="2017"/>
+								<core:Item key="2016" text="2016"/>
+								<core:Item key="2015" text="2015"/>
+							</m:ComboBox>
+							<m:ComboBox placeholder="Month" class="sapUiSmallMarginEnd">
+								<core:Item key="01" text="January"/>
+								<core:Item key="02" text="February"/>
+								<core:Item key="03" text="March"/>
+								<core:Item key="04" text="April"/>
+								<core:Item key="05" text="May"/>
+								<core:Item key="06" text="June"/>
+								<core:Item key="07" text="July"/>
+								<core:Item key="08" text="August"/>
+								<core:Item key="09" text="September"/>
+								<core:Item key="10" text="October"/>
+								<core:Item key="11" text="November"/>
+								<core:Item key="12" text="December"/>
+							</m:ComboBox>
+						</m:items>
+					</m:FlexBox>
+					<m:FlexBox alignItems="Start" justifyContent="Start">
+						<m:items>
+							<m:CheckBox text="Only over budget"/>
+							<m:CheckBox text="Only over budget (up to date)"/>
+						</m:items>
+					</m:FlexBox>
+				</m:content>
+			</m:Panel>
+		</semantic:headerContent>
 		<semantic:content>
-			<TreeTable 
-				id="treeTable" 
-				selectionMode="Single" 
-				enableColumnReordering="true" 
-				expandFirstLevel="false" 
-				fixedLayout="false" 
-				visibleRowCountMode="Auto"
-				rows="{ 
-					path: '/CostUnits', 
-					parameters: 
-					{
-						countMode: 'Inline', 
-						treeAnnotationProperties: 
-						{ 
-							hierarchyLevelFor: 'HierarchyLevel', 
-							hierarchyNodeFor : 'Id', 
-							hierarchyParentNodeFor: 'ParentId', 
-							hierarchyDrillStateFor : 'DrillState'
-						}
-					}
-				}">
+			<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"
+				fixedLayout="false" visibleRowCountMode="Auto"
+				rows="{ path: '/CostCenterUnits', parameters: { countMode: 'Inline', treeAnnotationProperties: { hierarchyLevelFor: 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor: 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }"
+				rowSelectionChange="onRowSelectionChange">
 				<columns>
-					<Column label="Name" hAlign="Center" >
+					<Column label="Name" hAlign="Center">
 						<template>
 							<layout:HorizontalLayout>
-								<core:Icon src="sap-icon://{Icon}" />
+								<core:Icon src="sap-icon://{Icon}"/>
 								<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>
 							</layout:HorizontalLayout>
 						</template>
 					</Column>
 					<Column label="Actual" hAlign="Center" width="8em">
 						<template>
-							<m:ObjectNumber
-								textAlign="Center"
-								number="{
-										parts:[{path:'Actual'},{path:'Currency'}],
-										type: 'sap.ui.model.type.Currency',
-										formatOptions: {showMeasure: false}
-									}"
+							<m:ObjectNumber textAlign="Center"
+								number="{ parts:[{path:'Actual'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{Currency}"/>
 						</template>
 					</Column>
 					<Column label="Planned" hAlign="Center" width="8em">
 						<template>
-							<m:ObjectNumber
-								textAlign="Center"
-								number="{
-										parts:[{path:'Planned'},{path:'Currency'}],
-										type: 'sap.ui.model.type.Currency',
-										formatOptions: {showMeasure: false}
-									}"
-								unit="{Currency}" />
+							<m:ObjectNumber textAlign="Center"
+								number="{ parts:[{path:'Planned'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}"/>
 						</template>
 					</Column>
 					<Column label="Variance" hAlign="Center" width="8em">
 						<template>
 							<m:VBox alignItems="Center">
-								<m:ObjectNumber
-									textAlign="Center"
-									number="{
-											parts:[{path:'VarAbs'},{path:'Currency'}],
-											type: 'sap.ui.model.type.Currency',
-											formatOptions: {showMeasure: false}
-										}"
-									unit="{Currency}"
-									state="{State}" />
-								<m:ObjectNumber 
-									class="sapUiTinyMarginBegin"
-									number=" {VarPerc}"
-									unit="%"
-									state="{State}" />
+								<m:ObjectNumber textAlign="Center"
+									number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+									unit="{Currency}" state="{State}"/>
+								<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>
 							</m:VBox>
 						</template>
 					</Column>
-					<Column label="Status" hAlign="Center">
+					<Column label="Var by Period" wrapping="true" hAlign="Center" width="8em">
 						<template>
 							<m:VBox alignItems="Center">
-								<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="{Planned}" class="sapUiSmallMargin">
-									<micro:actual>
-										<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>
-									</micro:actual>
-									<micro:thresholds>
-										<micro:BulletMicroChartData value="0" color="Good"/>
-										<micro:BulletMicroChartData value="{= ${Planned} / 2 }" color="Neutral"/>
-										<micro:BulletMicroChartData actualValueLabel="Planned" value="{Planned}" color="Error"/>
-									</micro:thresholds>
-								</micro:BulletMicroChart>
+								<m:ObjectNumber textAlign="Center"
+									number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+									unit="{Currency}" state="{State}"/>
+								<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>
 							</m:VBox>
 						</template>
 					</Column>
-					
+					<!--<Column label="Status" hAlign="Center">-->
+					<!--	<template>-->
+					<!--		<m:VBox alignItems="Center">-->
+					<!--			<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="{Planned}" class="sapUiSmallMargin">-->
+					<!--				<micro:actual>-->
+					<!--					<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>-->
+					<!--				</micro:actual>-->
+					<!--				<micro:thresholds>-->
+					<!--					<micro:BulletMicroChartData value="0" color="Good"/>-->
+					<!--					<micro:BulletMicroChartData value="{= ${Planned} / 2 }" color="Neutral"/>-->
+					<!--					<micro:BulletMicroChartData actualValueLabel="Planned" value="{Planned}" color="Error"/>-->
+					<!--				</micro:thresholds>-->
+					<!--			</micro:BulletMicroChart>-->
+					<!--		</m:VBox>-->
+					<!--	</template>-->
+					<!--</Column>-->
 				</columns>
 			</TreeTable>
 		</semantic:content>
-			<!--<semantic:mainAction>-->
-				<!--<semantic:MainAction press="onDisplay" text="Display" />-->
-			<!--</semantic:mainAction>-->
-	</semantic:FullscreenPage>
+		<semantic:footerMainAction>
+			<semantic:FooterMainAction press="onDisplay" text="Display"/>
+		</semantic:footerMainAction>
+	</semantic:SemanticPage>
 </mvc:View>
