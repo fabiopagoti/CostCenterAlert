@@ -1,6 +1,5 @@
 <mvc:View controllerName="festo.co.costcenteralert.controller.S1" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic" xmlns:layout="sap.ui.layout" xmlns:micro="sap.suite.ui.microchart" xmlns:footerbar="sap.ushell.ui.footerbar"
-	xmlns:core="sap.ui.core" xmlns="sap.ui.table">
+	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core" xmlns="sap.ui.table">
 	<semantic:SemanticPage id="page" showFooter="{view>/showFooter}" headerPinnable="false">
 		<semantic:titleHeading>
 			<m:Title text="Cost Centers and Groups"/>
@@ -11,24 +10,25 @@
 					<m:SearchField placeholder="Cost Center (Group) Name" value="{ui>/globalFilter}" search="filterGlobally"/>
 					<m:FlexBox alignItems="Start" justifyContent="Start">
 						<m:items>
-							<m:ComboBox placeholder="Year" class="sapUiSmallMarginEnd">
-								<core:Item key="2017" text="2017"/>
-								<core:Item key="2016" text="2016"/>
-								<core:Item key="2015" text="2015"/>
+							<m:ComboBox placeholder="Results by" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
+								<m:items>
+									<core:Item key="{filters>key}" text="{filters>text}"/>
+								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Month" class="sapUiSmallMarginEnd">
-								<core:Item key="01" text="January"/>
-								<core:Item key="02" text="February"/>
-								<core:Item key="03" text="March"/>
-								<core:Item key="04" text="April"/>
-								<core:Item key="05" text="May"/>
-								<core:Item key="06" text="June"/>
-								<core:Item key="07" text="July"/>
-								<core:Item key="08" text="August"/>
-								<core:Item key="09" text="September"/>
-								<core:Item key="10" text="October"/>
-								<core:Item key="11" text="November"/>
-								<core:Item key="12" text="December"/>
+							<m:ComboBox placeholder="Year" class="sapUiSmallMarginEnd" items="{filters>/years}" >
+								<m:items>
+									<core:Item key="{filters>key}" text="{filters>text}"/>
+								</m:items>
+							</m:ComboBox>
+							<m:ComboBox placeholder="Quarter" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
+								<m:items>
+									<core:Item key="{filters>key}" text="{filters>text}"/>
+								</m:items>
+							</m:ComboBox>
+							<m:ComboBox placeholder="Month" class="sapUiSmallMarginEnd" items="{filters>/months}">
+								<m:items>
+									<core:Item key="{filters>key}" text="{filters>text}"/>
+								</m:items>
 							</m:ComboBox>
 						</m:items>
 					</m:FlexBox>
@@ -49,10 +49,10 @@
 				<columns>
 					<Column label="Name" hAlign="Center">
 						<template>
-							<layout:HorizontalLayout>
+							<m:FlexBox>
 								<core:Icon src="sap-icon://{Icon}"/>
 								<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>
-							</layout:HorizontalLayout>
+							</m:FlexBox>
 						</template>
 					</Column>
 					<Column label="Actual" hAlign="Center" width="8em">

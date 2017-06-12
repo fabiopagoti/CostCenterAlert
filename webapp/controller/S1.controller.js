@@ -11,7 +11,7 @@ sap.ui.define([
 	return BaseController.extend("festo.co.costcenteralert.controller.S1", {
 
 		formatter: formatter,
-
+		
 		/* =========================================================== */
 		/* lifecycle methods                                           */
 		/* =========================================================== */
@@ -41,6 +41,8 @@ sap.ui.define([
 				showFooter: false
 			});
 			this.setModel(oViewModel, "view");
+
+			this._createFilterModel();
 
 			// Make sure, busy indication is showing immediately so there is no
 			// break after the busy indication for loading the view's meta data is
@@ -94,7 +96,7 @@ sap.ui.define([
 			var oViewModel = this.getModel("view");
 			var oSource = oEvent.getSource();
 			var oParameters = oEvent.getParameters();
-			
+
 			if (oSource.getSelectedIndex() >= 0) {
 				oViewModel.setProperty("/showFooter", true);
 				var oSelectedObject = oParameters.rowContext.getObject();
@@ -109,6 +111,11 @@ sap.ui.define([
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
+
+		_createFilterModel: function(oEvent) {
+			var oFilterModel = new JSONModel(this._filters);
+			this.setModel(oFilterModel, "filters");
+		},
 
 		/**
 		 * Shows the selected item on the object page
