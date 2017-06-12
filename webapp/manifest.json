@@ -39,10 +39,7 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -69,8 +66,8 @@
 			}
 		},
 		"contentDensities": {
-			"compact": false,
-			"cozy": false
+			"compact": true,
+			"cozy": true
 		},
 		"models": {
 			"i18n": {
@@ -101,9 +98,7 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": [
-						"notFound"
-					]
+					"target": ["notFound"]
 				},
 				"async": true
 			},
