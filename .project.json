@@ -8,7 +8,8 @@
     "sourceFolder": "webapp",
     "excludedFolders": [],
     "excludedFiles": [],
-    "buildRequired": true
+    "buildRequired": true,
+    "lastBuildDateTime": "Mon, 12 Jun 2017 12:23:07 GMT"
   },
   "dataBinding": {
     "/webapp/view/NotFound.view.xml": {
@@ -59,5 +60,10 @@
     "notifyBeforePushLevel": "Error",
     "blockPush": false,
     "blockPushLevel": "Error"
+  },
+  "hcpdeploy": {
+    "account": "a8706642f",
+    "name": "costcenteralert",
+    "lastVersionWeTriedToDeploy": "1.0.0"
   }
 }
