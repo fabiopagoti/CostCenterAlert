@@ -8,7 +8,7 @@ sap.ui.define([
 ], function(BaseController, JSONModel, History, formatter, Filter, FilterOperator) {
 	"use strict";
 
-	return BaseController.extend("festo.co.costcenteralert.controller.Worklist", {
+	return BaseController.extend("festo.co.costcenteralert.controller.S1", {
 
 		formatter: formatter,
 

@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="festo.co.costcenteralert.controller.Worklist"
+	controllerName="festo.co.costcenteralert.controller.S2"
 	xmlns:m="sap.m" 
 	xmlns:mvc="sap.ui.core.mvc" 
 	xmlns:semantic="sap.m.semantic" 
@@ -9,8 +9,10 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.ui.table" 
 	>
-	<semantic:FullscreenPage id="page">
-		
+	<semantic:FullscreenPage
+		id="page"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
 		<semantic:content>
 			<TreeTable 
 				id="treeTable" 
@@ -20,7 +22,7 @@
 				fixedLayout="false" 
 				visibleRowCountMode="Auto"
 				rows="{ 
-					path: '/CostUnits', 
+					path: '/ToCostElementGroups', 
 					parameters: 
 					{
 						countMode: 'Inline', 
@@ -37,12 +39,12 @@
 					<Column label="Name" hAlign="Center" >
 						<template>
 							<layout:HorizontalLayout>
-								<core:Icon src="sap-icon://{Icon}" />
-								<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>
+								<core:Icon src="sap-icon://{Icon}"/>
+								<m:ObjectIdentifier text=" {Name}"/>
 							</layout:HorizontalLayout>
 						</template>
 					</Column>
-					<Column label="Actual" hAlign="Center" width="8em">
+					<Column label="Actual" hAlign="Center">
 						<template>
 							<m:ObjectNumber
 								textAlign="Center"
@@ -54,7 +56,7 @@
 								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="Planned" hAlign="Center" width="8em">
+					<Column label="Planned" hAlign="Center">
 						<template>
 							<m:ObjectNumber
 								textAlign="Center"
@@ -66,9 +68,9 @@
 								unit="{Currency}" />
 						</template>
 					</Column>
-					<Column label="Variance" hAlign="Center" width="8em">
+					<Column label="Variance" hAlign="Center">
 						<template>
-							<m:VBox alignItems="Center">
+							<layout:HorizontalLayout>
 								<m:ObjectNumber
 									textAlign="Center"
 									number="{
@@ -76,38 +78,19 @@
 											type: 'sap.ui.model.type.Currency',
 											formatOptions: {showMeasure: false}
 										}"
-									unit="{Currency}"
+									unit="{Currency} "
 									state="{State}" />
-								<m:ObjectNumber 
-									class="sapUiTinyMarginBegin"
-									number=" {VarPerc}"
-									unit="%"
+								<m:ObjectNumber
+									number=" ({VarPerc}"
+									unit="%)"
 									state="{State}" />
-							</m:VBox>
+							</layout:HorizontalLayout>
 						</template>
 					</Column>
-					<Column label="Status" hAlign="Center">
-						<template>
-							<m:VBox alignItems="Center">
-								<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="{Planned}" class="sapUiSmallMargin">
-									<micro:actual>
-										<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>
-									</micro:actual>
-									<micro:thresholds>
-										<micro:BulletMicroChartData value="0" color="Good"/>
-										<micro:BulletMicroChartData value="{= ${Planned} / 2 }" color="Neutral"/>
-										<micro:BulletMicroChartData actualValueLabel="Planned" value="{Planned}" color="Error"/>
-									</micro:thresholds>
-								</micro:BulletMicroChart>
-							</m:VBox>
-						</template>
-					</Column>
-					
 				</columns>
 			</TreeTable>
 		</semantic:content>
-			<!--<semantic:mainAction>-->
-				<!--<semantic:MainAction press="onDisplay" text="Display" />-->
-			<!--</semantic:mainAction>-->
+
 	</semantic:FullscreenPage>
+
 </mvc:View>

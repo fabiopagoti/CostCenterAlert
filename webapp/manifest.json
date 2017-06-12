@@ -39,14 +39,11 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": [
-			"sap_hcb",
-			"sap_belize"
-		]
+		"supportedThemes": ["sap_hcb", "sap_belize"]
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "festo.co.costcenteralert.view.App",
+			"viewName": "festo.co.costcenteralert.view.S0",
 			"type": "XML",
 			"id": "app"
 		},
@@ -69,8 +66,8 @@
 			}
 		},
 		"contentDensities": {
-			"compact": false,
-			"cozy": false
+			"compact": true,
+			"cozy": true
 		},
 		"models": {
 			"i18n": {
@@ -101,38 +98,33 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": [
-						"notFound"
-					]
+					"target": ["notFound"]
 				},
 				"async": true
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "worklist",
-					"target": [
-						"worklist"
-					]
-				},
-				{
-					"pattern": "CostCenterGroups/{objectId}",
-					"name": "object",
-					"target": [
-						"object"
-					]
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "cost-centers",
+				"target": ["cost-centers"]
+			},{
+				"pattern": "CostCenterGroup/{CostCenterGroup}",
+				"name": "cost-center-group",
+				"target": ["cost-elements"]
+			},{
+				"pattern": "CostCenterGroup/{CostCenterGroup}/CostCenter/[CostCenter]",
+				"name": "cost-center",
+				"target": ["cost-elements"]
+			}],
 			"targets": {
-				"worklist": {
-					"viewName": "Worklist",
-					"viewId": "worklist",
+				"cost-centers": {
+					"viewName": "S1",
+					"viewId": "S1",
 					"viewLevel": 1,
 					"title": "{i18n>worklistViewTitle}"
 				},
-				"object": {
-					"viewName": "Object",
-					"viewId": "object",
+				"cost-elements": {
+					"viewName": "S2",
+					"viewId": "S2",
 					"viewLevel": 2,
 					"title": "{i18n>objectViewTitle}"
 				},

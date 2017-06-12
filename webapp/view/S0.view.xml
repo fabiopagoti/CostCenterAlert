@@ -1,6 +1,6 @@
 <mvc:View
 	xmlns:mvc="sap.ui.core.mvc"
-	controllerName="festo.co.costcenteralert.controller.App"
+	controllerName="festo.co.costcenteralert.controller.S0"
 	displayBlock="true"
 	xmlns="sap.m">
 
