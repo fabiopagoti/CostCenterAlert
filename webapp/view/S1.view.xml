@@ -1,45 +1,81 @@
 <mvc:View controllerName="festo.co.costcenteralert.controller.S1" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core" xmlns="sap.ui.table">
+	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns="sap.ui.table">
 	<semantic:SemanticPage id="page" showFooter="{view>/showFooter}" headerPinnable="false">
 		<semantic:titleHeading>
 			<m:Title text="Cost Centers and Groups"/>
 		</semantic:titleHeading>
 		<semantic:headerContent>
-			<m:Panel headerText="Filters" expandable="true">
-				<m:content>
-					<m:SearchField placeholder="Cost Center (Group) Name" value="{ui>/globalFilter}" search="filterGlobally"/>
-					<m:FlexBox alignItems="Start" justifyContent="Start">
-						<m:items>
-							<m:ComboBox placeholder="Results by" value="Month" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
-								<m:items>
-									<core:Item key="{filters>key}" text="{filters>text}"/>
-								</m:items>
-							</m:ComboBox>
-							<m:ComboBox placeholder="Year" value="2017" class="sapUiSmallMarginEnd" items="{filters>/years}" >
-								<m:items>
-									<core:Item key="{filters>key}" text="{filters>text}"/>
-								</m:items>
-							</m:ComboBox>
-							<m:ComboBox placeholder="Quarter" value="Q2" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
-								<m:items>
-									<core:Item key="{filters>key}" text="{filters>text}"/>
-								</m:items>
-							</m:ComboBox>
-							<m:ComboBox placeholder="Month" value="June" class="sapUiSmallMarginEnd" items="{filters>/months}">
-								<m:items>
-									<core:Item key="{filters>key}" text="{filters>text}"/>
-								</m:items>
-							</m:ComboBox>
-						</m:items>
-					</m:FlexBox>
-					<m:FlexBox alignItems="Start" justifyContent="Start">
-						<m:items>
-							<m:CheckBox text="Only over budget"/>
-							<m:CheckBox text="Only over budget (YTD)"/>
-						</m:items>
-					</m:FlexBox>
-				</m:content>
-			</m:Panel>
+			<form:Form editable="false">
+				<form:title>
+					<core:Title text="Filters"/>
+				</form:title>
+				<form:layout>
+					<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+						emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false"/>
+				</form:layout>
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Cost Center (Group) Name">
+								<form:fields>
+									<m:SearchField placeholder="Production" value="{ui>/globalFilter}" search="filterGlobally"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Results By">
+								<form:fields>
+									<m:ComboBox value="Month" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
+										<m:items>
+											<core:Item key="{filters>key}" text="{filters>text}"/>
+										</m:items>
+									</m:ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Period">
+								<form:fields>
+									<m:ComboBox placeholder="Year" value="2017" class="sapUiSmallMarginEnd" items="{filters>/years}">
+										<m:items>
+											<core:Item key="{filters>key}" text="{filters>text}"/>
+										</m:items>
+										<m:layoutData>
+											<layout:GridData span="XL2 L2 M2 S4"/>
+										</m:layoutData>
+									</m:ComboBox>
+									<m:ComboBox placeholder="Quarter" value="Q2" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
+										<m:items>
+											<core:Item key="{filters>key}" text="{filters>text}"/>
+										</m:items>
+										<m:layoutData>
+											<layout:GridData span="XL2 L2 M2 S4"/>
+										</m:layoutData>
+									</m:ComboBox>
+									<m:ComboBox placeholder="Month" value="June" class="sapUiSmallMarginEnd" items="{filters>/months}">
+										<m:items>
+											<core:Item key="{filters>key}" text="{filters>text}"/>
+										</m:items>
+										<m:layoutData>
+											<!--<layout:GridData span="XL2 L2 M2 S4"/>-->
+										</m:layoutData>
+									</m:ComboBox>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Variance">
+								<form:fields>
+									<m:RangeSlider value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Variance YTD">
+								<form:fields>
+									<m:RangeSlider value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom"/>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+				</form:formContainers>
+			</form:Form>
 		</semantic:headerContent>
 		<semantic:content>
 			<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"
