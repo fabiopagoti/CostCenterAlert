@@ -1,4 +1,5 @@
-[{
+[{	
+	"CostCenter": "1",
 	"Id": "12",
 	"Type": "Cost Element Group",
 	"Icon": "activity-items",
@@ -14,6 +15,7 @@
 	"VarAbs": 7000,
 	"VarPerc": -700
 }, {
+	"CostCenter": "1",
 	"Id": "13",
 	"Type": "Cost Element Group",
 	"Icon": "activity-items",
@@ -29,6 +31,7 @@
 	"VarAbs": 1000,
 	"VarPerc": 0
 }, {
+	"CostCenter": "1",
 	"Type": "Cost Element Group",
 	"Id": "14",
 	"Icon": "activity-items",
@@ -44,6 +47,7 @@
 	"VarAbs": 65,
 	"VarPerc": 56
 }, {
+	"CostCenter": "1",
 	"Type": "Cost Element Group",
 	"Id": "15",
 	"Icon": "activity-items",

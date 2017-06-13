@@ -11,7 +11,7 @@ sap.ui.define([
 	return BaseController.extend("festo.co.costcenteralert.controller.S1", {
 
 		formatter: formatter,
-		
+
 		/* =========================================================== */
 		/* lifecycle methods                                           */
 		/* =========================================================== */
@@ -100,13 +100,34 @@ sap.ui.define([
 			if (oSource.getSelectedIndex() >= 0) {
 				oViewModel.setProperty("/showFooter", true);
 				var oSelectedObject = oParameters.rowContext.getObject();
+				this._selectedObject = oSelectedObject;
 			} else {
 				oViewModel.setProperty("/showFooter", false);
 			}
 		},
 
 		onDisplay: function(oEvent) {
+			// // @type sap.ui.table.TreeTable
+			// var oTreeTable = this.byId("treeTable");
 
+			if (!this._selectedObject) {
+				return;
+			}
+
+			switch (this._selectedObject.Type) {
+				case "Cost Center Group":
+					this.getRouter().navTo("cost-center-group", {
+						costCenterGroup: this._selectedObject.Id
+					});
+					break;
+				case "Cost Center":
+					this.getRouter().navTo("cost-center", {
+						costCenter: this._selectedObject.Id,
+						costCenterGroup: this._selectedObject.ParentId
+					});
+					break;
+				default:
+			}
 		},
 		/* =========================================================== */
 		/* internal methods                                            */

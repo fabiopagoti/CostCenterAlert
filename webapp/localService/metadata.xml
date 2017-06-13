@@ -25,16 +25,37 @@
                 <Property Name="State" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Color" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
-                <NavigationProperty Name="ToCostElementGroups" Relationship="S1.CostUnit_CostUnit" FromRole="Parent" ToRole="Child"></NavigationProperty>
+                <NavigationProperty Name="ToCostElementGroups" Relationship="S1.CostUnit_CostElementUnit" FromRole="Parent" ToRole="Child"></NavigationProperty>
             </EntityType>
-            <Association Name="CostUnit_CostUnit">
+            <EntityType Name="CostElementUnit">
+                <Key>
+                	<PropertyRef Name="CostCenter"/>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Id" Type="Edm.String" Nullable="false" edmanno:StoreGeneratedPattern="Identity"></Property>
+                <Property Name="Type" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Icon" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="ParentId" Type="Edm.String" Nullable="true"></Property>
+                <Property Name="HierarchyLevel" Type="Edm.Int32" Nullable="false"></Property>
+                <Property Name="DrillState" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Actual" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="Planned" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="VarAbs" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="VarPerc" Type="Edm.Decimal" Nullable="false"></Property>
+                <Property Name="State" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Color" Type="Edm.String" Nullable="false"></Property>
+                <Property Name="Currency" Type="Edm.String" Nullable="false"></Property>
+            </EntityType>
+            <Association Name="CostUnit_CostElementUnit">
                 <End Type="S1.CostUnit" Role="Parent" Multiplicity="1"></End>
                 <End Type="S1.CostUnit" Role="Child" Multiplicity="*"></End>
             </Association>
             <EntityContainer Name="EC1" m:IsDefaultEntityContainer="true" edmanno:LazyLoadingEnabled="true">
                 <EntitySet Name="CostCenterUnits" EntityType="S1.CostUnit"></EntitySet>
-                <EntitySet Name="CostElementUnits" EntityType="S1.CostUnit"></EntitySet>
-                <AssociationSet Name="CostCenterUnits_CostElementUnits" Association="S1.CostUnit_CostUnit">
+                <EntitySet Name="CostElementUnits" EntityType="S1.CostElementUnit"></EntitySet>
+                <AssociationSet Name="CostCenterUnits_CostElementUnits" Association="S1.CostUnit_CostElementUnit">
                     <End Role="Parent" EntitySet="CostCenterUnits"></End>
                     <End Role="Child" EntitySet="CostElementUnits"></End>
                 </AssociationSet>

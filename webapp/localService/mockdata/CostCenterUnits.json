@@ -13,7 +13,7 @@
 	"Color": "Neutral",
 	"Currency": "EUR",
 	"Type": "Cost Center Group"
-},{
+}, {
 	"Id": "2",
 	"Name": "Cost Center Group A.1",
 	"ParentId": "1",

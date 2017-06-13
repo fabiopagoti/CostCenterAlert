@@ -34,7 +34,9 @@ sap.ui.define([
 						delay : 0
 					});
 
-				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+				this.getRouter().getRoute("cost-center-group").attachPatternMatched(this._onCostCenterGroupMatched, this);
+				this.getRouter().getRoute("cost-center").attachPatternMatched(this._onCostCenterMatched, this);
+				
 
 				// Store original busy indicator delay, so it can be restored later on
 				iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
@@ -50,25 +52,6 @@ sap.ui.define([
 			/* event handlers                                              */
 			/* =========================================================== */
 
-			/**
-			 * Event handler when the share in JAM button has been clicked
-			 * @public
-			 */
-			onShareInJamPress : function () {
-				var oViewModel = this.getModel("objectView"),
-					oShareDialog = sap.ui.getCore().createComponent({
-						name: "sap.collaboration.components.fiori.sharing.dialog",
-						settings: {
-							object:{
-								id: location.href,
-								share: oViewModel.getProperty("/shareOnJamTitle")
-							}
-						}
-					});
-				oShareDialog.open();
-			},
-
-
 			/* =========================================================== */
 			/* internal methods                                            */
 			/* =========================================================== */
@@ -79,16 +62,25 @@ sap.ui.define([
 			 * @param {sap.ui.base.Event} oEvent pattern match event in route 'object'
 			 * @private
 			 */
-			_onObjectMatched : function (oEvent) {
-				var sObjectId =  oEvent.getParameter("arguments").objectId;
+			_onCostCenterGroupMatched : function (oEvent) {
+				var oArguments = oEvent.getParameter("arguments");
+				var sCostCenterGroup = oArguments.costCenterGroup;
+				debugger;
 				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("CostCenterGroups", {
-						Id :  sObjectId
-					});
-					this._bindView("/" + sObjectPath);
+					this._bindView("/CostCenterUnits('1')");
 				}.bind(this));
 			},
-
+			
+			_onCostCenterMatched : function (oEvent) {
+				var oArguments = oEvent.getParameter("arguments");
+				var sCostCenterGroup = oArguments.costCenterGroup;
+				var sCostCenter = oArguments.costCenter;
+				debugger;
+				this.getModel().metadataLoaded().then( function() {
+					this._bindView("/CostCenterUnits('6')");
+				}.bind(this));
+			},
+			
 			/**
 			 * Binds the view to the object path.
 			 * @function
@@ -101,6 +93,9 @@ sap.ui.define([
 
 				this.getView().bindElement({
 					path: sObjectPath,
+					parameters: {
+						expand: "ToCostElementGroups"
+					},
 					events: {
 						change: this._onBindingChange.bind(this),
 						dataRequested: function () {
@@ -130,19 +125,13 @@ sap.ui.define([
 					return;
 				}
 
-				var oResourceBundle = this.getResourceBundle(),
-					oObject = oView.getBindingContext().getObject(),
-					sObjectId = oObject.Id,
-					sObjectName = oObject.Name;
+				// var oResourceBundle = this.getResourceBundle(),
+				// 	oObject = oView.getBindingContext().getObject(),
+				// 	sObjectId = oObject.Id,
+				// 	sObjectName = oObject.Name;
 
 				// Everything went fine.
 				oViewModel.setProperty("/busy", false);
-				oViewModel.setProperty("/saveAsTileTitle", oResourceBundle.getText("saveAsTileTitle", [sObjectName]));
-				oViewModel.setProperty("/shareOnJamTitle", sObjectName);
-				oViewModel.setProperty("/shareSendEmailSubject",
-				oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-				oViewModel.setProperty("/shareSendEmailMessage",
-				oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 			}
 
 		});
