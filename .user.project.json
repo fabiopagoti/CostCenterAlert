@@ -1,7 +1,7 @@
 {
   "run": [
     {
-      "filePath": "/webapp/test/flpSandboxMockServer.html",
+      "filePath": "/webapp/index.html",
       "previewMode": 1,
       "dataMode": 0,
       "workspace": "withoutWorkspace",
@@ -20,7 +20,7 @@
         "id": 3672820,
         "runnerId": "webapprunner",
         "displayName": "Index",
-        "lastRunTimeStamp": 1497358877954
+        "lastRunTimeStamp": 1497363980576
       }
     },
     {

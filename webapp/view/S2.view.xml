@@ -5,9 +5,11 @@
 		<semantic:titleHeading>
 			<m:Title text="Cost Elements and Groups"/>
 		</semantic:titleHeading>
+		<semantic:titleSnappedContent>
+			<m:Text text="from Cost Center {Name}"/>
+		</semantic:titleSnappedContent>
 		<semantic:headerContent>
 			<m:ObjectHeader
-				icon="sap-icon://{Icon}"
 				title="{Name}"
 				number="{
 					parts:[{path:'Actual'},{path:'CurrencyCode'}],
@@ -17,12 +19,16 @@
 				numberUnit="{Currency}"
 				numberState="{State}">
 				<m:attributes>
-					<m:ObjectAttribute title="Parent" text="{ParentId}" />
+					<!--<m:ObjectAttribute title="Parent" text="{ParentId}" />-->
 				</m:attributes>
 				<m:statuses>
 					<m:ObjectStatus
 						title="Planned"
-						text="{Planned}"
+						text="{
+							parts:[{path:'Planned'},{path:'Currency'}],
+							type: 'sap.ui.model.type.Currency',
+							formatOptions: {showMeasure: false }
+						}"
 						state="{State}" />
 				</m:statuses>
 				<!--<m:additionalNumbers>-->
@@ -37,22 +43,22 @@
 					<m:SearchField placeholder="Cost Element (Group) Name" value="{ui>/globalFilter}" search="filterGlobally"/>
 					<m:FlexBox alignItems="Start" justifyContent="Start">
 						<m:items>
-							<m:ComboBox placeholder="Results by" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
+							<m:ComboBox placeholder="Results by" value="Month" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Year" class="sapUiSmallMarginEnd" items="{filters>/years}" >
+							<m:ComboBox placeholder="Year" value="2017" class="sapUiSmallMarginEnd" items="{filters>/years}" >
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Quarter" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
+							<m:ComboBox placeholder="Quarter" value="Q2" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Month" class="sapUiSmallMarginEnd" items="{filters>/months}">
+							<m:ComboBox placeholder="Month" value="June" class="sapUiSmallMarginEnd" items="{filters>/months}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
@@ -69,53 +75,53 @@
 			</m:Panel>
 		</semantic:headerContent>
 		<semantic:content>
-			<!--<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"-->
-			<!--	fixedLayout="false" visibleRowCountMode="Auto"-->
-			<!--	rows="{ path: '/ToCostElementGroups', parameters: { countMode: 'Inline', treeAnnotationProperties: { hierarchyLevelFor: 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor: 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }"-->
-			<!--	rowSelectionChange="onRowSelectionChange">-->
-			<!--	<columns>-->
-			<!--		<Column label="Name" hAlign="Center">-->
-			<!--			<template>-->
-			<!--				<m:FlexBox>-->
-			<!--					<core:Icon src="sap-icon://{Icon}"/>-->
-			<!--					<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>-->
-			<!--				</m:FlexBox>-->
-			<!--			</template>-->
-			<!--		</Column>-->
-			<!--		<Column label="Actual" hAlign="Center" width="8em">-->
-			<!--			<template>-->
-			<!--				<m:ObjectNumber textAlign="Center"-->
-			<!--					number="{ parts:[{path:'Actual'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"-->
-			<!--					unit="{Currency}"/>-->
-			<!--			</template>-->
-			<!--		</Column>-->
-			<!--		<Column label="Planned" hAlign="Center" width="8em">-->
-			<!--			<template>-->
-			<!--				<m:ObjectNumber textAlign="Center"-->
-			<!--					number="{ parts:[{path:'Planned'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"-->
-			<!--					unit="{Currency}"/>-->
-			<!--			</template>-->
-			<!--		</Column>-->
-			<!--		<Column label="Variance" hAlign="Center" width="8em">-->
-			<!--			<template>-->
-			<!--				<m:VBox alignItems="Center">-->
-			<!--					<m:ObjectNumber textAlign="Center"-->
-			<!--						number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"-->
-			<!--						unit="{Currency}" state="{State}"/>-->
-			<!--					<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>-->
-			<!--				</m:VBox>-->
-			<!--			</template>-->
-			<!--		</Column>-->
-			<!--		<Column label="Var by Period" wrapping="true" hAlign="Center" width="8em">-->
-			<!--			<template>-->
-			<!--				<m:VBox alignItems="Center">-->
-			<!--					<m:ObjectNumber textAlign="Center"-->
-			<!--						number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"-->
-			<!--						unit="{Currency}" state="{State}"/>-->
-			<!--					<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>-->
-			<!--				</m:VBox>-->
-			<!--			</template>-->
-			<!--		</Column>-->
+			<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"
+				fixedLayout="true" visibleRowCountMode="Interactive"
+				rows="{ path: 'ToCostElementGroups', parameters: { countMode: 'Inline', treeAnnotationProperties: { hierarchyLevelFor: 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor: 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }"
+				rowSelectionChange="onRowSelectionChange">
+				<columns>
+					<Column label="Name" hAlign="Center">
+						<template>
+							<m:FlexBox>
+								<core:Icon src="sap-icon://{Icon}"/>
+								<m:ObjectIdentifier text=" {Name}" class="sapUiTinyMarginBegin"/>
+							</m:FlexBox>
+						</template>
+					</Column>
+					<Column label="Actual" hAlign="Center" width="8em">
+						<template>
+							<m:ObjectNumber textAlign="Center"
+								number="{ parts:[{path:'Actual'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}"/>
+						</template>
+					</Column>
+					<Column label="Planned" hAlign="Center" width="8em">
+						<template>
+							<m:ObjectNumber textAlign="Center"
+								number="{ parts:[{path:'Planned'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}"/>
+						</template>
+					</Column>
+					<Column label="Variance" hAlign="Center" width="8em">
+						<template>
+							<m:VBox alignItems="Center">
+								<m:ObjectNumber textAlign="Center"
+									number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+									unit="{Currency}" state="{State}"/>
+								<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>
+							</m:VBox>
+						</template>
+					</Column>
+					<Column label="Var by Period" wrapping="true" hAlign="Center" width="8em">
+						<template>
+							<m:VBox alignItems="Center">
+								<m:ObjectNumber textAlign="Center"
+									number="{ parts:[{path:'VarAbs'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+									unit="{Currency}" state="{State}"/>
+								<m:ObjectNumber class="sapUiTinyMarginBegin" number=" {VarPerc}" unit="%" state="{State}"/>
+							</m:VBox>
+						</template>
+					</Column>
 					<!--<Column label="Status" hAlign="Center">-->
 					<!--	<template>-->
 					<!--		<m:VBox alignItems="Center">-->
@@ -132,8 +138,8 @@
 					<!--		</m:VBox>-->
 					<!--	</template>-->
 					<!--</Column>-->
-			<!--	</columns>-->
-			<!--</TreeTable>-->
+				</columns>
+			</TreeTable>
 		</semantic:content>
 		<semantic:footerMainAction>
 			<semantic:FooterMainAction press="onDisplay" text="Display"/>

@@ -10,22 +10,22 @@
 					<m:SearchField placeholder="Cost Center (Group) Name" value="{ui>/globalFilter}" search="filterGlobally"/>
 					<m:FlexBox alignItems="Start" justifyContent="Start">
 						<m:items>
-							<m:ComboBox placeholder="Results by" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
+							<m:ComboBox placeholder="Results by" value="Month" class="sapUiSmallMarginEnd" items="{filters>/resultsBy}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Year" class="sapUiSmallMarginEnd" items="{filters>/years}" >
+							<m:ComboBox placeholder="Year" value="2017" class="sapUiSmallMarginEnd" items="{filters>/years}" >
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Quarter" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
+							<m:ComboBox placeholder="Quarter" value="Q2" class="sapUiSmallMarginEnd" items="{filters>/quarters}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
 							</m:ComboBox>
-							<m:ComboBox placeholder="Month" class="sapUiSmallMarginEnd" items="{filters>/months}">
+							<m:ComboBox placeholder="Month" value="June" class="sapUiSmallMarginEnd" items="{filters>/months}">
 								<m:items>
 									<core:Item key="{filters>key}" text="{filters>text}"/>
 								</m:items>
@@ -43,7 +43,7 @@
 		</semantic:headerContent>
 		<semantic:content>
 			<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"
-				fixedLayout="false" visibleRowCountMode="Auto"
+				fixedLayout="true" visibleRowCountMode="Interactive"
 				rows="{ path: '/CostCenterUnits', parameters: { countMode: 'Inline', treeAnnotationProperties: { hierarchyLevelFor: 'HierarchyLevel', hierarchyNodeFor : 'Id', hierarchyParentNodeFor: 'ParentId', hierarchyDrillStateFor : 'DrillState' } } }"
 				rowSelectionChange="onRowSelectionChange">
 				<columns>

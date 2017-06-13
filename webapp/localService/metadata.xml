@@ -29,11 +29,10 @@
             </EntityType>
             <EntityType Name="CostElementUnit">
                 <Key>
-                	<PropertyRef Name="CostCenter"/>
                     <PropertyRef Name="Id"/>
                 </Key>
-                <Property Name="CostCenter" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Id" Type="Edm.String" Nullable="false" edmanno:StoreGeneratedPattern="Identity"></Property>
+                <Property Name="CostCenter" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Type" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Icon" Type="Edm.String" Nullable="false"></Property>
                 <Property Name="Name" Type="Edm.String" Nullable="false"></Property>
@@ -50,7 +49,15 @@
             </EntityType>
             <Association Name="CostUnit_CostElementUnit">
                 <End Type="S1.CostUnit" Role="Parent" Multiplicity="1"></End>
-                <End Type="S1.CostUnit" Role="Child" Multiplicity="*"></End>
+                <End Type="S1.CostElementUnit" Role="Child" Multiplicity="*"></End>
+                <ReferentialConstraint>
+                	<Principal Role="Parent">
+                		<PropertyRef Name="Id"/>
+                	</Principal>
+                	<Dependent Role="Child">
+                		<PropertyRef Name="CostCenter"/>
+                	</Dependent>
+                </ReferentialConstraint>
             </Association>
             <EntityContainer Name="EC1" m:IsDefaultEntityContainer="true" edmanno:LazyLoadingEnabled="true">
                 <EntitySet Name="CostCenterUnits" EntityType="S1.CostUnit"></EntitySet>
