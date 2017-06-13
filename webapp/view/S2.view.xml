@@ -68,7 +68,7 @@
 					<m:FlexBox alignItems="Start" justifyContent="Start">
 						<m:items>
 							<m:CheckBox text="Only over budget"/>
-							<m:CheckBox text="Only over budget (up to date)"/>
+							<m:CheckBox text="Only over budget (YTD)"/>
 						</m:items>
 					</m:FlexBox>
 				</m:content>
@@ -112,7 +112,7 @@
 							</m:VBox>
 						</template>
 					</Column>
-					<Column label="Var by Period" wrapping="true" hAlign="Center" width="8em">
+					<Column label="Var YTD" wrapping="true" hAlign="Center" width="8em">
 						<template>
 							<m:VBox alignItems="Center">
 								<m:ObjectNumber textAlign="Center"
