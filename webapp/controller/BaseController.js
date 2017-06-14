@@ -131,23 +131,23 @@ sap.ui.define([
 			var oRightHandle = $(aHandlers[1]);
 
 			function getColor(iValue) {
-				if (iValue >= 100) {
-					return "bad";
-				} else if (iValue > 50) {
+				if (iValue >= 70) {
+					return "good";
+				} else if (iValue > 30) {
 					return "warning";
 				} else {
-					return "good";
+					return "bad";
 				}
 			}
 
 			function getColorFromTheme(iValue) {
 				var oThemeParameters = sap.ui.core.theming.Parameters;
-				if (iValue >= 100) {
-					return oThemeParameters.get("sapErrorBorderColor");
-				} else if (iValue > 50) {
+				if (iValue >= 70) {
+					return oThemeParameters.get("sapSuccessBorderColor");
+				} else if (iValue > 30) {
 					return oThemeParameters.get("sapWarningBorderColor");
 				} else {
-					return oThemeParameters.get("sapSuccessBorderColor");
+					return oThemeParameters.get("sapErrorBorderColor");
 				}
 			}
 
