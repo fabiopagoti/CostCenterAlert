@@ -118,16 +118,70 @@ sap.ui.define([
 		},
 
 		/**
-		 * Event handler when the share by E-Mail button has been clicked
+		 * Set slider handle's colors based on RangeSlider values
+		 * @param {object} oSlider Range Slider
 		 * @public
 		 */
-		onShareEmailPress: function() {
-			var oViewModel = (this.getModel("objectView") || this.getModel("worklistView"));
-			sap.m.URLHelper.triggerEmail(
-				null,
-				oViewModel.getProperty("/shareSendEmailSubject"),
-				oViewModel.getProperty("/shareSendEmailMessage")
-			);
+		setRangeSliderColors: function(oSlider) {
+			var oSliderDom = $("#" + oSlider.getId());
+
+			var aHandlers = oSliderDom.find(".sapMSliderHandle");
+
+			var oLeftHandle = $(aHandlers[0]);
+			var oRightHandle = $(aHandlers[1]);
+
+			function getColor(iValue) {
+				if (iValue >= 100) {
+					return "bad";
+				} else if (iValue > 50) {
+					return "warning";
+				} else {
+					return "good";
+				}
+			}
+
+			function getColorFromTheme(iValue) {
+				var oThemeParameters = sap.ui.core.theming.Parameters;
+				if (iValue >= 100) {
+					return oThemeParameters.get("sapErrorBorderColor");
+				} else if (iValue > 50) {
+					return oThemeParameters.get("sapWarningBorderColor");
+				} else {
+					return oThemeParameters.get("sapSuccessBorderColor");
+				}
+			}
+
+			if (sap.ui.core.theming.Parameters.get("sapSuccessBorderColor")) {
+				oLeftHandle.css("background-color", getColorFromTheme(oSlider.getValue()));
+				oRightHandle.css("background-color", getColorFromTheme(oSlider.getValue2()));
+			} else {
+				aHandlers.removeClass("good warning bad");
+				oLeftHandle.addClass(getColor(oSlider.getValue()));
+				oRightHandle.addClass(getColor(oSlider.getValue2()));
+			}
+
+		},
+
+		/**
+		 * Unset slider handle's colors based on RangeSlider values
+		 * @param {object} oSlider Range Slider
+		 * @public
+		 */
+		unsetRangeSliderColors: function(oSlider) {
+			var oSliderDom = $("#" + oSlider.getId());
+
+			var aHandlers = oSliderDom.find(".sapMSliderHandle");
+
+			var oLeftHandle = $(aHandlers[0]);
+			var oRightHandle = $(aHandlers[1]);
+
+			if (sap.ui.core.theming.Parameters.get("sapSuccessBorderColor")) {
+				oLeftHandle.css("background-color", "unset");
+				oRightHandle.css("background-color", "unset");
+			} else {
+				aHandlers.removeClass("good warning bad");
+			}
+
 		}
 
 	});

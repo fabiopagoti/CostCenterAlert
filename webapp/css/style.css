@@ -1,7 +1,15 @@
-.sapMSliderHandle {
-    background: rgba(255, 0, 0, 0.5);
+.sapMSliderHandle .sapMSliderHandle:hover {
+    background: unset;
 }
 
-.myMSliderHandle {
-    background: rgba(0, 255, 0, 0.5);
+.good {
+    background: rgba(0, 138, 59, 0.5);
+}
+
+.warning {
+    background: rgba(240, 171, 0, 0.5);
+}
+
+.bad {
+    background: rgba(229, 41, 41, 0.5);
 }

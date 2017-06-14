@@ -129,6 +129,27 @@ sap.ui.define([
 				default:
 			}
 		},
+		
+		onRangeSliderChange: function(oEvent) {
+			this.setRangeSliderColors(oEvent.getSource());
+		},
+
+		onCheckBoxSelectVariance: function(oEvent) {
+			if (oEvent.getSource().getSelected()) {
+				this.setRangeSliderColors(this.byId("slider_variance"));
+			} else {
+				this.unsetRangeSliderColors(this.byId("slider_variance"));
+			}
+		},
+
+		onCheckBoxSelectYtd: function(oEvent) {
+			if (oEvent.getSource().getSelected()) {
+				this.setRangeSliderColors(this.byId("slider_ytd"));
+			} else {
+				this.unsetRangeSliderColors(this.byId("slider_ytd"));
+			}
+		},
+
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */

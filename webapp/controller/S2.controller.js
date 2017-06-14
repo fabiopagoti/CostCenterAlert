@@ -44,7 +44,7 @@ sap.ui.define([
 				// Restore original busy indicator delay for the object view
 				oViewModel.setProperty("/delay", iOriginalBusyDelay);
 			});
-			
+
 			this._createFilterModel();
 		},
 
@@ -52,6 +52,25 @@ sap.ui.define([
 		/* event handlers                                              */
 		/* =========================================================== */
 
+		onRangeSliderChange: function(oEvent) {
+			this.setRangeSliderColors(oEvent.getSource());
+		},
+
+		onCheckBoxSelectVariance: function(oEvent) {
+			if (oEvent.getSource().getSelected()) {
+				this.setRangeSliderColors(this.byId("slider_variance"));
+			} else {
+				this.unsetRangeSliderColors(this.byId("slider_variance"));
+			}
+		},
+
+		onCheckBoxSelectYtd: function(oEvent) {
+			if (oEvent.getSource().getSelected()) {
+				this.setRangeSliderColors(this.byId("slider_ytd"));
+			} else {
+				this.unsetRangeSliderColors(this.byId("slider_ytd"));
+			}
+		},
 		/* =========================================================== */
 		/* internal methods                                            */
 		/* =========================================================== */
@@ -96,7 +115,7 @@ sap.ui.define([
 		_bindView: function(sObjectPath) {
 			var oViewModel = this.getModel("objectView"),
 				oDataModel = this.getModel();
-			
+
 			this.getView().bindElement({
 				path: sObjectPath,
 				parameters: {

@@ -1,6 +1,6 @@
 <mvc:View controllerName="festo.co.costcenteralert.controller.S1" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns="sap.ui.table">
-	<semantic:SemanticPage id="page" showFooter="{view>/showFooter}" headerPinnable="false">
+	<semantic:SemanticPage id="page" showFooter="{view>/showFooter}" headerPinnable="true">
 		<semantic:titleHeading>
 			<m:Title text="Cost Centers and Groups"/>
 		</semantic:titleHeading>
@@ -64,12 +64,24 @@
 						<form:formElements>
 							<form:FormElement label="Variance">
 								<form:fields>
-									<m:RangeSlider value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom"/>
+									<m:RangeSlider id="slider_variance" value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom" change="onRangeSliderChange"
+										liveChange="onRangeSliderChange"/>
+									<m:CheckBox select="onCheckBoxSelectVariance">
+										<m:layoutData>
+											<layout:GridData span="XL1 L1 M1 S1"/>
+										</m:layoutData>
+									</m:CheckBox>
 								</form:fields>
 							</form:FormElement>
 							<form:FormElement label="Variance YTD">
 								<form:fields>
-									<m:RangeSlider value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom"/>
+									<m:RangeSlider id="slider_ytd" value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom" change="onRangeSliderChange"
+										liveChange="onRangeSliderChange"/>
+									<m:CheckBox select="onCheckBoxSelectYtd">
+										<m:layoutData>
+											<layout:GridData span="XL1 L1 M1 S1"/>
+										</m:layoutData>
+									</m:CheckBox>
 								</form:fields>
 							</form:FormElement>
 						</form:formElements>
@@ -125,22 +137,6 @@
 							</m:VBox>
 						</template>
 					</Column>
-					<!--<Column label="Status" hAlign="Center">-->
-					<!--	<template>-->
-					<!--		<m:VBox alignItems="Center">-->
-					<!--			<micro:BulletMicroChart size="Auto" isResponsive="false" scale="{Currency}" showValueMarker="true" targetValue="{Planned}" class="sapUiSmallMargin">-->
-					<!--				<micro:actual>-->
-					<!--					<micro:BulletMicroChartData actualValueLabel="Actual" value="{Actual}" color="{Color}"/>-->
-					<!--				</micro:actual>-->
-					<!--				<micro:thresholds>-->
-					<!--					<micro:BulletMicroChartData value="0" color="Good"/>-->
-					<!--					<micro:BulletMicroChartData value="{= ${Planned} / 2 }" color="Neutral"/>-->
-					<!--					<micro:BulletMicroChartData actualValueLabel="Planned" value="{Planned}" color="Error"/>-->
-					<!--				</micro:thresholds>-->
-					<!--			</micro:BulletMicroChart>-->
-					<!--		</m:VBox>-->
-					<!--	</template>-->
-					<!--</Column>-->
 				</columns>
 			</TreeTable>
 		</semantic:content>
