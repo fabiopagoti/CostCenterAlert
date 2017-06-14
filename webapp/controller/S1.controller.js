@@ -21,9 +21,9 @@ sap.ui.define([
 		 * @public
 		 */
 		onInit: function() {
-			var oViewModel,
-				iOriginalBusyDelay,
-				oTable = this.byId("treeTable");
+			var oViewModel;
+				// iOriginalBusyDelay,
+				// oTable = this.byId("treeTable");
 
 			// Put down worklist table's original value for busy indicator delay,
 			// so it can be restored later on. Busy handling on the table is

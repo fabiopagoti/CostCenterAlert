@@ -98,7 +98,6 @@ sap.ui.define([
 
 		_onCostCenterMatched: function(oEvent) {
 			var oArguments = oEvent.getParameter("arguments");
-			var sCostCenterGroup = oArguments.costCenterGroup;
 			var sCostCenter = oArguments.costCenter;
 			this._sCostCenter = sCostCenter;
 			this.getModel().metadataLoaded().then(function() {
@@ -141,23 +140,23 @@ sap.ui.define([
 
 		_onBindingChange: function() {
 			return;
-			var oView = this.getView(),
-				oViewModel = this.getModel("objectView"),
-				oElementBinding = oView.getElementBinding();
+			// var oView = this.getView(),
+			// 	oViewModel = this.getModel("objectView"),
+			// 	oElementBinding = oView.getElementBinding();
 
-			// No data for the binding
-			if (!oElementBinding.getBoundContext()) {
-				this.getRouter().getTargets().display("objectNotFound");
-				return;
-			}
+			// // No data for the binding
+			// if (!oElementBinding.getBoundContext()) {
+			// 	this.getRouter().getTargets().display("objectNotFound");
+			// 	return;
+			// }
 
-			// var oResourceBundle = this.getResourceBundle(),
-			// 	oObject = oView.getBindingContext().getObject(),
-			// 	sObjectId = oObject.Id,
-			// 	sObjectName = oObject.Name;
+			// // var oResourceBundle = this.getResourceBundle(),
+			// // 	oObject = oView.getBindingContext().getObject(),
+			// // 	sObjectId = oObject.Id,
+			// // 	sObjectName = oObject.Name;
 
-			// Everything went fine.
-			oViewModel.setProperty("/busy", false);
+			// // Everything went fine.
+			// oViewModel.setProperty("/busy", false);
 		}
 
 	});
