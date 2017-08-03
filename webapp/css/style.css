@@ -13,3 +13,10 @@
 .bad {
     background: rgba(229, 41, 41, 0.5);
 }
+
+/* @see https://github.com/SAP/openui5/issues/1632 */
+div[class*="sapUiRespGrid"] > div[class*="sapUiRespGridSpan"] {
+    float: left;
+    /* overflow: visible; uncomment it to work */
+     overflow: visible;
+}
