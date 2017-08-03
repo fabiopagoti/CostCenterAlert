@@ -236,4 +236,21 @@
 	"Planned": 6856,
 	"Actual": 8356,
 	"VarPerc": 8
+}, {
+	"Id": "32",
+	"CostCenter": "1",
+	"Type": "Cost Element Group",
+	"Icon": "activity-items",
+	"Name": " SCEM-09999 - Others",
+	"ParentId": "",
+	"HierarchyLevel": 0,
+	"State": "None",
+	"Color": "Neutral",
+	"Currency": "EUR",
+	"DrillState": "expanded",
+	"VarAbs": 0,
+	"PreviousYear": 101,
+	"Planned": 0,
+	"Actual": 0,
+	"VarPerc": 0
 }]

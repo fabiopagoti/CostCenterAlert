@@ -64,8 +64,8 @@
 						<form:formElements>
 							<form:FormElement label="Variance">
 								<form:fields>
-									<m:RangeSlider id="slider_variance" value="50" value2="100" min="0" max="100" class="sapUiSmallMarginBottom" change="onRangeSliderChange"
-										liveChange="onRangeSliderChange"/>
+									<m:RangeSlider id="slider_variance" value="50" value2="100" min="0" max="100" inputsAsTooltips="true" showHandleTooltip="false"
+										class="sapUiSmallMarginBottom" change="onRangeSliderChange" liveChange="onRangeSliderChange"/>
 									<m:CheckBox select="onCheckBoxSelectVariance">
 										<m:layoutData>
 											<layout:GridData span="XL1 L1 M1 S1"/>
@@ -88,6 +88,8 @@
 					</form:FormContainer>
 				</form:formContainers>
 			</form:Form>
+			<m:RangeSlider value="50" value2="100" min="0" max="100" inputsAsTooltips="true" showHandleTooltip="false"
+				class="sapUiSmallMarginBottom" change="onRangeSliderChange" liveChange="onRangeSliderChange"/>
 		</semantic:headerContent>
 		<semantic:content>
 			<TreeTable id="treeTable" selectionMode="Single" selectionBehavior="RowOnly" enableColumnReordering="true" expandFirstLevel="false"
