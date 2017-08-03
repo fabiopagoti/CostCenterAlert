@@ -122,6 +122,13 @@
 							</m:FlexBox>
 						</template>
 					</Column>
+					<Column label="Previous Year" hAlign="Center" width="8em">
+						<template>
+							<m:ObjectNumber textAlign="Center"
+								number="{ parts:[{path:'PreviousYear'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}"/>
+						</template>
+					</Column>
 					<Column label="Actual" hAlign="Center" width="8em">
 						<template>
 							<m:ObjectNumber textAlign="Center"

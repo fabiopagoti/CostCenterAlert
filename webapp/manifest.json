@@ -7,7 +7,7 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"applicationVersion": {
-			"version": "1.0.0"
+			"version": "1.0.2"
 		},
 		"dataSources": {
 			"mainService": {
@@ -39,7 +39,10 @@
 			"tablet": true,
 			"phone": true
 		},
-		"supportedThemes": ["sap_hcb", "sap_belize"]
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
 	},
 	"sap.ui5": {
 		"rootView": {
@@ -98,23 +101,35 @@
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {
-					"target": ["notFound"]
+					"target": [
+						"notFound"
+					]
 				},
 				"async": true
 			},
-			"routes": [{
-				"pattern": "",
-				"name": "cost-center-groups",
-				"target": ["cost-centers"]
-			}, {
-				"pattern": "CostCenterGroup/{costCenterGroup}",
-				"name": "cost-center-group",
-				"target": ["cost-elements"]
-			}, {
-				"pattern": "CostCenterGroup/{costCenterGroup}/CostCenter/{costCenter}",
-				"name": "cost-center",
-				"target": ["cost-elements"]
-			}],
+			"routes": [
+				{
+					"pattern": "",
+					"name": "cost-center-groups",
+					"target": [
+						"cost-centers"
+					]
+				},
+				{
+					"pattern": "CostCenterGroup/{costCenterGroup}",
+					"name": "cost-center-group",
+					"target": [
+						"cost-elements"
+					]
+				},
+				{
+					"pattern": "CostCenterGroup/{costCenterGroup}/CostCenter/{costCenter}",
+					"name": "cost-center",
+					"target": [
+						"cost-elements"
+					]
+				}
+			],
 			"targets": {
 				"cost-centers": {
 					"viewName": "S1",
@@ -139,9 +154,11 @@
 			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		}
 	},
 	"sap.platform.hcp": {

@@ -9,7 +9,7 @@
     "excludedFolders": [],
     "excludedFiles": [],
     "buildRequired": true,
-    "lastBuildDateTime": "Tue, 13 Jun 2017 15:21:09 GMT"
+    "lastBuildDateTime": "Wed, 14 Jun 2017 16:39:57 GMT"
   },
   "dataBinding": {
     "/webapp/view/NotFound.view.xml": {
@@ -64,6 +64,6 @@
   "hcpdeploy": {
     "account": "a8706642f",
     "name": "costcenteralert",
-    "lastVersionWeTriedToDeploy": "1.0.2"
+    "lastVersionWeTriedToDeploy": "1.0.3"
   }
 }
