@@ -58,6 +58,27 @@
 									</m:ComboBox>
 								</form:fields>
 							</form:FormElement>
+							<form:FormElement label="Planning Version">
+								<form:fields>
+									<m:ComboBox placeholder="Forecast 1">
+										<m:items>
+											<core:Item key="version-1" text="FC1 - first forecast after 1.Q"/>
+											<core:Item key="version-2" text="FC2 - modified FC  after 2.Q"/>
+											<core:Item key="version-3" text="FC3 - last forecast after 3.Q"/>
+										</m:items>
+									</m:ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Currency">
+								<form:fields>
+									<m:ComboBox value="Controlling Area" >
+										<m:items>
+											<core:Item key="controlling-area" text="Controlling Area"/>
+											<core:Item key="company-code" text="Company Code"/>
+										</m:items>
+									</m:ComboBox>
+								</form:fields>
+							</form:FormElement>
 						</form:formElements>
 					</form:FormContainer>
 					<form:FormContainer>
@@ -103,28 +124,28 @@
 							</m:FlexBox>
 						</template>
 					</Column>
-					<Column label="Prev Year" hAlign="Center" width="8em">
+					<Column label="Prev Year" hAlign="Center" width="10em">
 						<template>
 							<m:ObjectNumber textAlign="Center"
 								number="{ parts:[{path:'PreviousYear'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="Actual" hAlign="Center" width="8em">
+					<Column label="Actual" hAlign="Center" width="10em">
 						<template>
 							<m:ObjectNumber textAlign="Center"
 								number="{ parts:[{path:'Actual'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="Planned" hAlign="Center" width="8em">
+					<Column label="Planned" hAlign="Center" width="10em">
 						<template>
 							<m:ObjectNumber textAlign="Center"
 								number="{ parts:[{path:'Planned'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{Currency}"/>
 						</template>
 					</Column>
-					<Column label="Var Act/PY" wrapping="true" hAlign="Center" width="8em">
+					<Column label="Var Act/PY" wrapping="true" hAlign="Center" width="10em">
 						<template>
 							<m:VBox alignItems="Center">
 								<m:ObjectNumber textAlign="Center"
@@ -134,7 +155,7 @@
 							</m:VBox>
 						</template>
 					</Column>
-					<Column label="Variance" hAlign="Center" width="8em">
+					<Column label="Variance Plan / Actual" hAlign="Center" width="10em" >
 						<template>
 							<m:VBox alignItems="Center">
 								<m:ObjectNumber textAlign="Center"
